@@ -4,6 +4,7 @@ This project walks through how to create a basic Electron app using Angular and 
 
 # Setup
 [how to setup node, angular, the cli correctly](https://gist.github.com/milesstanfield/17f980ad4ed6d038a255f8fc3b222add#file-angular-and-node-setup-md)
+
 if you use electron-packager for production builds you will need to have [wine](https://www.winehq.org/) installed `brew install wine`
 
 # Create an angular app with the cli
@@ -22,7 +23,7 @@ ng g s services/electron -m app.module
 curl -o ./src/app/services/electron.service.ts https://raw.githubusercontent.com/milesstanfield/ng-electron/master/src/app/services/electron.service.ts
 ```
 
-# add the following to the package.json file. Dont skip any of these!
+# add the following to the package.json file
 ```
 ...
 "main": "electron.js",
