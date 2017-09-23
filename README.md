@@ -4,11 +4,11 @@ This project walks through how to create a basic Electron app using Angular and 
 
 # Setup
 [how to setup node, angular, the cli correctly](https://gist.github.com/milesstanfield/17f980ad4ed6d038a255f8fc3b222add#file-angular-and-node-setup-md)
-
+if you use electron-packager for production builds you will need to have [wine](https://www.winehq.org/) installed `brew install wine`
 
 # Create an angular app with the cli
 ```
-ng new my-angular-app && cd my-angular-app
+ng new my-electron-app && cd my-electron-app
 ```
 
 # download the main electron.ts file
@@ -22,7 +22,7 @@ ng g s services/electron -m app.module
 curl -o ./src/app/services/electron.service.ts https://raw.githubusercontent.com/milesstanfield/ng-electron/master/src/app/services/electron.service.ts
 ```
 
-# add the following to the package.json file
+# add the following to the package.json file. Dont skip any of these!
 ```
 ...
 "main": "electron.js",
@@ -31,19 +31,30 @@ curl -o ./src/app/services/electron.service.ts https://raw.githubusercontent.com
   "app": "dist"
 },
 "scripts": {
-  ...
-  "build:watch": "yarn run clean && yarn run build --watch true",
+  ...  
   "rimraf": "rimraf",
   "clean": "yarn run rimraf -- dist",
+  "build:watch": "yarn run clean && yarn run build --watch true",
   "build:electron": "tsc electron.ts --outDir dist && copyfiles package.json dist && cd dist && yarn install --prod && cd ..",
-  "start:electron": "electron ./dist --serve"
+  "start:electron": "electron ./dist --serve",
+  "package": "electron-packager ./dist My Electron App --all"
 },
 ...
 ```
 
+#  Update the version key with electron version in package.json
+you can find electron version by doing `yarn electron -v`
+```
+...
+"version": "1.6.13",
+...
+```
+
+
+
 # install electron and other dependencies
 ```
-yarn add electron electron-reload rimraf copyfiles --save-dev
+yarn add electron electron-reload electron-packager rimraf copyfiles --save-dev
 ```
 
 there is a [security issue with electron v1.8.0](https://github.com/segmentio/nightmare/issues/1269) which has caused a revert to last stable version so make sure
@@ -95,4 +106,9 @@ yarn run build:watch
 ```
 yarn run build:electron
 yarn run start:electron
+```
+
+# you can package the builds for app submission and/or download now with electron-packager
+```
+yarn run package
 ```
