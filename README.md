@@ -33,19 +33,17 @@ curl -o ./src/app/services/electron.service.ts https://raw.githubusercontent.com
 },
 "scripts": {
   ...  
-  "rimraf": "rimraf",
-  "clean": "yarn run rimraf -- dist",
-  "build:watch": "yarn run clean && yarn run build --watch true",
-  "build:electron": "tsc electron.ts --outDir dist && copyfiles package.json dist && cd dist && yarn install --prod && cd ..",
-  "start:electron": "electron ./dist --serve",
-  "package": "electron-packager ./dist My Electron App --mac"
+  "build:watch": "rm -rf dist && yarn run build --watch=true",
+  "build:electron": "tsc electron.ts --outDir dist && cp package.json dist && cd dist && yarn install --prod && cd ..",
+  "start:electron": "electron dist --serve",
+  "package": "electron-packager dist My Electron App --mac"
 },
 ...
 ```
 
 # install electron and other dependencies
 ```
-yarn add electron electron-reload electron-packager rimraf copyfiles --dev
+yarn add electron electron-reload electron-packager --dev
 ```
 
 #  Update the version key with electron version in package.json
