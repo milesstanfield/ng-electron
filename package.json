@@ -1,6 +1,6 @@
 {
   "name": "ng-electron",
-  "version": "1.6.13",
+  "version": "1.7.6",
   "license": "MIT",
   "main": "electron.js",
   "directories": {
@@ -19,7 +19,7 @@
     "build:watch": "yarn run clean && yarn run build --watch true",
     "build:electron": "tsc electron.ts --outDir dist && copyfiles package.json dist && cd dist && yarn install --prod && cd ..",
     "start:electron": "electron ./dist --serve",
-    "package": "electron-packager ./dist My Electron App --all"
+    "package": "electron-packager ./dist My Electron App --mac"
   },
   "private": true,
   "dependencies": {

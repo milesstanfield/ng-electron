@@ -38,28 +38,23 @@ curl -o ./src/app/services/electron.service.ts https://raw.githubusercontent.com
   "build:watch": "yarn run clean && yarn run build --watch true",
   "build:electron": "tsc electron.ts --outDir dist && copyfiles package.json dist && cd dist && yarn install --prod && cd ..",
   "start:electron": "electron ./dist --serve",
-  "package": "electron-packager ./dist My Electron App --all"
+  "package": "electron-packager ./dist My Electron App --mac"
 },
 ...
+```
+
+# install electron and other dependencies
+```
+yarn add electron electron-reload electron-packager rimraf copyfiles --dev
 ```
 
 #  Update the version key with electron version in package.json
 you can find electron version by doing `yarn electron -v`
 ```
 ...
-"version": "1.6.13",
+"version": "1.7.8",
 ...
 ```
-
-
-
-# install electron and other dependencies
-```
-yarn add electron electron-reload electron-packager rimraf copyfiles --save-dev
-```
-
-there is a [security issue with electron v1.8.0](https://github.com/segmentio/nightmare/issues/1269) which has caused a revert to last stable version so make sure
-you use `"electron": "1.7.6",` until that is resolved
 
 
 # update bottom of typings.d.ts file with window logic
